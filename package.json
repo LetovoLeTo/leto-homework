@@ -1,0 +1,25 @@
+{
+  "name": "leto-homework",
+  "version": "0.1.0",
+  "description": "A service for letovians who need help with homework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LetovoLeTo/leto-homework.git"
+  },
+  "keywords": [
+    "leto",
+    "letovo",
+    "homework"
+  ],
+  "author": "Milk_Cool",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LetovoLeTo/leto-homework/issues"
+  },
+  "homepage": "https://github.com/LetovoLeTo/leto-homework#readme"
+}
