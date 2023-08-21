@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/LetovoLeTo/leto-homework/issues"
   },
-  "homepage": "https://github.com/LetovoLeTo/leto-homework#readme"
+  "homepage": "https://github.com/LetovoLeTo/leto-homework#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
