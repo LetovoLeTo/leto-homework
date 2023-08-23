@@ -7,6 +7,7 @@ Clone the main server, install the dependencies:
 git clone --recursive https://github.com/LetovoLeTo/leto-main-server.git
 cd leto-main-server
 npm i
+npm run install-recursively
 ```
 And run it:
 ```sh
