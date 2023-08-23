@@ -1,0 +1,10 @@
+body {
+    padding: 0;
+}
+
+div.topbar {
+    padding: 1rem;
+    width: 100vw;
+    height: auto;
+    background: #3e308a;
+}

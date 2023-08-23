@@ -4,7 +4,6 @@
   "description": "A service for letovians who need help with homework.",
   "main": "index.js",
   "scripts": {
-    "test": "node server.js",
     "start": "node server.js"
   },
   "repository": {
