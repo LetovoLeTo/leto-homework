@@ -4,11 +4,19 @@
         <meta charset="utf-8">
         <title>LeTo</title>
         <link href="/res/style.css" rel="stylesheet">
-        <link href="style.css" rel="stylesheet">
+        <link href="/qna/style.css" rel="stylesheet">
+        <script src="/qna/script.js" defer></script>
     </head>
     <body>
         <div class="topbar">
             <a href="/"><img class="logo" src="/res/logo.png"></a>
+            <a href="/qna" class="header white">Home</a>
+            <a href="/qna/new.html" class="header white">Ask</a>
         </div>
+        <div class="warn">
+            Do you want to help others with their homework?<br>
+            You can <a href="javascript:void(0)" onclick="subscribe()">enable notifications for new questions!</a>
+        </div>
+        <center id="latest-questions"></center>
     </body>
 </html>
