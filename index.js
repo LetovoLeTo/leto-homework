@@ -26,7 +26,7 @@ app.post("/qna/subscribe", (req, res) => {
     console.log(subscription);
     res.status(201).json({});
 
-    webpush.sendNotification(subscription, justSubscribed).catch(console.error);
+    webpush.sendNotification(subscription, JSON.stringify(justSubscribed)).catch(console.error);
 });
 
 app.use("/qna", express.static(join(__dirname, "html")));
