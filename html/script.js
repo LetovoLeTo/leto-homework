@@ -24,6 +24,7 @@ const subscribe = async () => {
         }
     });
     localStorage.setItem("subscribed", "yes");
+    document.querySelector("#question-notifications").remove();
 };
 
 document.addEventListener("DOMContentLoaded", () => fetch("/qna/latest").then(res => res.json()).then(res => {

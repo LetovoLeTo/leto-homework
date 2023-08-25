@@ -52,7 +52,7 @@ app.post("/qna/subscribe", (req, res) => {
 });
 app.post("/qna/new", (req, res) => {
     if(req.body.title.length > 200 || req.body.content.length > 5000)
-        return res.status(400).json({ "error": "Message too long!" })
+        return res.status(400).json({ "error": "Message too long!" });
     questions.json.push({
         "title": req.body.title,
         "content": req.body.content,
@@ -75,7 +75,16 @@ app.get("/qna/latest", (req, res) => {
     res.status(200).json(
         [...questions.json].reverse().slice(0, 20).map((x, i) => Object.assign({ "id": questions.json.length - i - 1 }, x))
     );
-})
+});
+app.post("/qna/comment", (req, res) => {
+    if(req.body.content.length > 1000)
+        return res.status(400).json({ "error": "Message too long!" });
+    questions.json[parseInt(req.body.id)].comments.push({
+        "content": req.body.content
+    });
+    questions.save();
+    res.status(201).json({});
+});
 
 app.use("/qna", express.static(join(__dirname, "html")));
 app.get("/qna", (req, res) => {
