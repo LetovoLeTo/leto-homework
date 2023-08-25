@@ -62,9 +62,12 @@ app.post("/qna/new", (req, res) => {
     });
     let notif = { ...newQuestion };
     notif.body = req.body.title;
-    notif.url = new URL("/qna/post?id=" + String(questions.json.length - 1), req.headers["origin"]);
+    notif.url = new URL("/qna/post.html?id=" + String(questions.json.length - 1), req.headers["origin"]);
     for(let i of subscriptions.json)
         webpush.sendNotification(i, JSON.stringify(notif)).catch(console.error);
+});
+app.get("/qna/post", (req, res) => {
+    res.status(200).json(questions.json[parseInt(req.query.id)]);
 });
 
 app.use("/qna", express.static(join(__dirname, "html")));

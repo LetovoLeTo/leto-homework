@@ -11,6 +11,6 @@ const handleForm = async e => {
             "Content-Type": "application/json"
         }
     })).json()).id;
-    location.href = "/qna/post?id=" + id;
+    location.href = "/qna/post.html?id=" + id;
 };
 document.querySelector("#form").addEventListener("submit", handleForm);
