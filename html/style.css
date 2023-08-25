@@ -16,3 +16,11 @@ div.topbar a {
 .white {
     color: white;
 }
+
+@media (min-width:1025px) {
+    div.question {
+        width: 40vw;
+        display: inline-block;
+        margin: 1rem;
+    }
+}
