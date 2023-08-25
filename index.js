@@ -69,6 +69,11 @@ app.post("/qna/new", (req, res) => {
 app.get("/qna/post", (req, res) => {
     res.status(200).json(questions.json[parseInt(req.query.id)]);
 });
+app.get("/qna/latest", (req, res) => {
+    res.status(200).json(
+        [...questions.json].reverse().slice(0, 20).map((x, i) => Object.assign({ "id": questions.json.length - i - 1 }, x))
+    );
+})
 
 app.use("/qna", express.static(join(__dirname, "html")));
 app.get("/qna", (req, res) => {
