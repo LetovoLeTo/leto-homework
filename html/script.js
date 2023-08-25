@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => fetch("/qna/latest").then(re
     for(let i of res) {
         let x = document.createElement("div");
         x.classList.add("notify");
+        x.classList.add("question");
         
         let title = document.createElement("h1");
         let link = document.createElement("a");

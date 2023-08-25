@@ -51,6 +51,8 @@ app.post("/qna/subscribe", (req, res) => {
     webpush.sendNotification(subscription, JSON.stringify(justSubscribed)).catch(console.error);
 });
 app.post("/qna/new", (req, res) => {
+    if(req.body.title.length > 200 || req.body.content.length > 5000)
+        return res.status(400).json({ "error": "Message too long!" })
     questions.json.push({
         "title": req.body.title,
         "content": req.body.content,
