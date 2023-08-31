@@ -4,7 +4,7 @@ const { stringReplace } = require("string-replace-middleware");
 const webpush = require("web-push");
 const db = require("leto-database");
 
-const app = express();
+const router = express.Router();
 
 const vapidPublicKey = process.env["VAPID_PUBLIC_KEY"];
 const vapidPrivateKey = process.env["VAPID_PRIVATE_KEY"];
@@ -25,15 +25,15 @@ const questions = db.newFile("/questions.json", []);
 subscriptions.read();
 questions.read();
 
-app.use(stringReplace({
+router.use(stringReplace({
     "{{publicVapidKey}}": vapidPublicKey
 }, {
     "contentTypeFilterRegexp": /./
 }));
-app.use(express.json());
+router.use(express.json());
 webpush.setVapidDetails("mailto:2026plyasovskikh.md@student.letovo.ru", vapidPublicKey, vapidPrivateKey);
 
-app.post("/qna/subscribe", (req, res) => {
+router.post("/qna/subscribe", (req, res) => {
     const subscription = req.body;
     do {
         let flag = false;
@@ -50,7 +50,7 @@ app.post("/qna/subscribe", (req, res) => {
 
     webpush.sendNotification(subscription, JSON.stringify(justSubscribed)).catch(console.error);
 });
-app.post("/qna/new", (req, res) => {
+router.post("/qna/new", (req, res) => {
     if(req.body.title.length > 200 || req.body.content.length > 5000)
         return res.status(400).json({ "error": "Message too long!" });
     questions.json.push({
@@ -68,15 +68,15 @@ app.post("/qna/new", (req, res) => {
     for(let i of subscriptions.json)
         webpush.sendNotification(i, JSON.stringify(notif)).catch(console.error);
 });
-app.get("/qna/post", (req, res) => {
+router.get("/qna/post", (req, res) => {
     res.status(200).json(questions.json[parseInt(req.query.id)]);
 });
-app.get("/qna/latest", (req, res) => {
+router.get("/qna/latest", (req, res) => {
     res.status(200).json(
         [...questions.json].reverse().slice(0, 20).map((x, i) => Object.assign({ "id": questions.json.length - i - 1 }, x))
     );
 });
-app.post("/qna/comment", (req, res) => {
+router.post("/qna/comment", (req, res) => {
     if(req.body.content.length > 1000)
         return res.status(400).json({ "error": "Message too long!" });
     questions.json[parseInt(req.body.id)].comments.push({
@@ -86,9 +86,9 @@ app.post("/qna/comment", (req, res) => {
     res.status(201).json({});
 });
 
-app.use("/qna", express.static(join(__dirname, "html")));
-app.get("/qna", (req, res) => {
+router.use("/qna", express.static(join(__dirname, "html")));
+router.get("/qna", (req, res) => {
     res.sendFile(join(__dirname, "html/index.html"));
 });
 
-module.exports = app;
+module.exports = router;
